@@ -2,7 +2,9 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.db import models
 
+import uuid
 
 class User(AbstractUser):
     """Default user for Licencias."""
@@ -20,3 +22,13 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+
+class Licencia(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField()
+    activa = models.BooleanField(default=False)
+
+    def __str__(self): 
+        return f'Usuario {self.email} Activo:{self.activa}'
+

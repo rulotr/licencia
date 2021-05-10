@@ -5,8 +5,14 @@ from django.utils.translation import gettext_lazy as _
 
 from licencias.users.forms import UserChangeForm, UserCreationForm
 
+from licencias.users.models import Licencia
+
 User = get_user_model()
 
+@admin.register(Licencia)
+class LicenciaAdmin(admin.ModelAdmin):
+    #fields = ['email','activa']
+    list_display = ['id', 'email', 'activa']
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
